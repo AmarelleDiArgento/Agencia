@@ -70,7 +70,7 @@ public class agenciaServ extends HttpServlet {
 
             switch (Accion) {
                 
-                case "registrar":
+                case "Registrar":
                     Nombre = request.getParameter("nombre");
                     Telefono = request.getParameter("telefono");
                     Direccion = request.getParameter("direccion");
@@ -102,9 +102,8 @@ public class agenciaServ extends HttpServlet {
 
                     break;
                 case "Listar":
-                    
-                    List<agenciaTab> agl = Asql.getAgencia().listar();
-                    Ses.setAttribute("lisAge", agl);
+                     List<agenciaTab> agl = Asql.getAgencia().listar();
+                     Ses.setAttribute("lisAge", agl);
                     //} else {
                     // msj = "No tienes permisos para consultar registros";
                     //}

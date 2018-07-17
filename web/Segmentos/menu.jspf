@@ -1,0 +1,184 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Modelo.Tabs.UsuarioTab"%>
+<%@page import="Modelo.Tabs.PermisoTab"%>
+<%@page import="java.util.List"%>
+<%@ page pageEncoding="UTF-8" %>
+<%
+
+    HttpSession SesM = request.getSession(true);
+    List<PermisoTab> menu = (List<PermisoTab>) SesM.getAttribute("Menu");
+    UsuarioTab u = (UsuarioTab) SesM.getAttribute("log");
+
+    if (menu != null && menu.size() > 0) {
+
+%>
+<nav class="z-depth-0">
+    <div class="nav-wrapper white">
+        <a href="#!" class="brand-logo">
+            <img style="z-index: 99; position: relative;"  src="img/logo.png" width="100%">
+
+        </a>
+        <!-- <div id="google_translate_element"></div><script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">more_vert</i></a>
+
+        <ul class="right hide-on-med-and-down">
+
+            <li>
+                <div class="input-field">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">search</i>
+
+                        <input id="buscar" type="text" class="form-control" placeholder="Escriba algo para filtrar" />
+                    </div>
+                </div>
+
+            </li>
+
+
+            <%                String md = "";
+                for (PermisoTab m : menu) {
+                    if (!m.getPerModulo().equalsIgnoreCase(md)) {
+            %>
+            <li><a href="<%=m.getPerUrl()%>" class="tooltipped" data-position="bottom" data-tooltip="<%=m.getPerModulo()%>"><i class="material-icons"><%=m.getPerIco()%></i></a></li>
+
+            <%
+                        md = m.getPerModulo();
+                    }
+
+                }%>
+            <li><a href="sessionFinally.jsp" class="tooltipped" data-position="bottom" data-tooltip="Cerrar sesión"><i class    ="material-icons">exit_to_app</i></a></li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<ul id="slide-out" class="sidenav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="img\LotoLila.jpg">
+            </div>
+            <a href="#"><img class="circle modal-trigger" href="#ModalImg"  src="<%=u.getAvatar()%>"></a>
+            <a href="#!name"><span class="white-text name"><%=u.toFullName()%></span></a>
+            <a href="#!email"><span class="white-text email"><%=u.getnRol()%></span></a>
+        </div>
+    </li>
+
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
+        <form>
+            <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </li>   
+    <%        for (PermisoTab m : menu) {
+            if (!m.getPerModulo().equalsIgnoreCase(md)) {
+
+    %>
+    <li ><a href="<%=m.getPerUrl()%>"><i class="material-icons"><%=m.getPerIco()%></i><%=m.getPerModulo()%></a></li>
+
+    <%
+                md = m.getPerModulo();
+            }
+
+        }%>
+    <li><div class="divider"></div></li>
+    <li ><a href="sessionFinally.jsp"><i class="material-icons">exit_to_app</i>Cerrar session</a></li>
+</ul>
+
+<!-- Modal Structure -->
+<div id="ModalImg" class="modal">
+    <form method="post" action="usuarios.do" enctype="multipart/form-data">
+        <div class="modal-content">
+            <h4>Selecciona el avatar para:</h4>
+
+            <input name="Usuario" type="text" value="<%=u.getCedula()%>" hidden />
+            <div class="file-field input-field col s3">
+
+                <i class="material-icons prefix">image</i>
+                <input type="file" name="IMG">
+                <input class="file-path validate" type="text">
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <input name="accion" value="Cargar" type="submit" class="modal-action waves-effect waves-light btn-flat">
+
+        </div>
+    </form>
+
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large pink">
+        <i class="large material-icons">
+            settings
+        </i>
+    </a>
+    <ul>
+        <%
+            String Mod = "";
+            String jsps = (String) SesM.getAttribute("jsp");
+            for (PermisoTab m : menu) {
+                if (m.getPerUrl().equalsIgnoreCase(jsps)) {
+                    Mod = m.getPerModulo();
+        %>            
+        <li>
+            <a href="#modalNuevo" class="btn-floating light-green tooltipped modal-trigger" data-position="left" data-tooltip="Nuev@ <%=m.getPerNombre()%>">
+                <i class="material-icons">
+                    <%=m.getPerIco()%>
+                </i>
+            </a>
+        </li>
+        <%
+                }
+            }
+            if (!Mod.equalsIgnoreCase("")) {
+        %>
+        <li>
+            <a href="#" class="btn-floating light-pink tooltipped" data-position="left" data-tooltip="Subir xls <%=Mod%>">
+                <i class="material-icons">
+                    attach_file
+                </i>
+            </a>
+        </li>
+        <%
+            }
+            for (PermisoTab m : menu) {
+                if (m.getPerModulo().equalsIgnoreCase(Mod) && !m.getPerUrl().equalsIgnoreCase(jsps)) {
+
+        %>            
+        <li>
+            <a href="<%=m.getPerUrl()%>" class="btn-floating purple tooltipped" data-position="left" data-tooltip="<%=m.getPerNombre()%>">
+                <i class="material-icons">
+                    <%=m.getPerIco()%>
+                </i>
+            </a>
+        </li>
+
+        <%                }
+            }
+        %>
+    </ul>
+</div>
+
+<%    } else {//
+        response.sendRedirect("permisos.do?accion=menu");
+    }
+
+%>

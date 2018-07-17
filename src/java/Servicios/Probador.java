@@ -28,7 +28,8 @@ public class Probador {
         Mensajes m = new Mensajes();
         try {
             AdminImp Asql = new AdminImp();
-
+            agenciaTab a = new agenciaTab(2323, "Cosa", "12", "1212");
+            m = Asql.getAgencia().insertar(a);
             /*
             // insertar agencia
             agenciaTab a = new agenciaTab(2323, "Cosa", "12", "1212");
@@ -41,7 +42,8 @@ public class Probador {
             }
             
              */
- /*
+            
+            /*
             // insertar aspirante
             aspiranteTab a = new aspiranteTab("12345","Pepe",12,"Masculino",1,1212);
             m = Asql.getAspirante().insertar(a);
@@ -52,7 +54,7 @@ public class Probador {
                 System.out.println(a.toString());
             }
              */
-            /*
+ /*
             // insertar empleabilidad
             empleabilidadTab a = new empleabilidadTab("12345",1,"20180610");
             m = Asql.getEmpleabilidad().insertar(a);
@@ -63,8 +65,8 @@ public class Probador {
             for (empleabilidadTab e : eList) {
                 System.out.println(e.toString());
             }
-            */
-            /*
+             */
+ /*
             // insertar oferta
             ofertaTab a = new ofertaTab("Blaaa Blaaa Blaaa Blaaa ","Blaaa Blaaa Blaaa Blaaa Blaaa Blaaa Blaaa","20180701","20180706");
             m = Asql.getOferta().insertar(a);
@@ -75,8 +77,8 @@ public class Probador {
             for (ofertaTab e : eList) {
                 System.out.println(e.toString());
             }
-            */  
-            /*
+             */
+ /*
             // insertar profesion
             profesionTab a = new profesionTab("Zapatero");
             m = Asql.getProfecion().insertar(a);
@@ -87,8 +89,13 @@ public class Probador {
             for (profesionTab p : pList) {
                 System.out.println(p.toString());
             }
-            */
-            
+             */
+            // Listar profesiones
+            List<profesionTab> pList = Asql.getProfesion().listar();
+
+            for (profesionTab p : pList) {
+                System.out.println(p.toString());
+            }
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error " + ex.getLocalizedMessage());
