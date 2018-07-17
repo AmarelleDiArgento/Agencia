@@ -10,10 +10,12 @@ IdProfesion int primary key auto_increment,
 NomProf varchar(50)
 );
 
-insert into TbProfesion(NomProf) values('Abogado');
-insert into TbProfesion(NomProf) values('Ingeniero de Sistemas');
-insert into TbProfesion(NomProf) values('Administracion de Empresas');
-insert into TbProfesion(NomProf) values('Psicologia');
+create procedure InsProNew(in NomProfNew varchar(12)) insert into TbProfesion(NomProf) values(NomProfNew);
+call Agencia.InsProNew('Abogado');
+call Agencia.InsProNew('Ingeniero de Sistemas');
+call Agencia.InsProNew('Administracion de Empresas');
+call Agencia.InsProNew('Psicologia');
+call Agencia.InsProNew('Ninja');
 
 /*Ver profesiones registradas disponible para combo*/
 create procedure VerProfesion() select * from TbProfesion;
@@ -72,7 +74,7 @@ constraint TbEmpleabilidad_TbOFertas Foreign Key (IdOferta) references TbOFertas
 );
 /***Ver Empleabilidad*/
 create procedure VerEmplea()
-Select Id,TbEmpleabilidad.IdAsp,NombreAsp,TbEmpleabilidad.IdOferta,TbOFertas.NombreOfer,Fecha 
+Select Id,IdAsp,TbAspirante.NombreAsp,IdOferta,TbOFertas.NombreOfer,Fecha 
 from TbEmpleabilidad 
 inner join TbAspirante on TbEmpleabilidad.IdAsp=TbAspirante.NumCedula
 inner join TbOFertas on TbEmpleabilidad.IdOferta=TbOFertas.IdOfer;
