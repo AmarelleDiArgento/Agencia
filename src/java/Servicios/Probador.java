@@ -9,6 +9,9 @@ import Model.Implementar.AdminImp;
 import Model.Interfaces.agencia;
 import Model.Tablas.agenciaTab;
 import Model.Tablas.aspiranteTab;
+import Model.Tablas.empleabilidadTab;
+import Model.Tablas.ofertaTab;
+import Model.Tablas.profesionTab;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -38,7 +41,7 @@ public class Probador {
             }
             
              */
-            /*
+ /*
             // insertar aspirante
             aspiranteTab a = new aspiranteTab("12345","Pepe",12,"Masculino",1,1212);
             m = Asql.getAspirante().insertar(a);
@@ -49,8 +52,43 @@ public class Probador {
                 System.out.println(a.toString());
             }
              */
- 
- 
+            /*
+            // insertar empleabilidad
+            empleabilidadTab a = new empleabilidadTab("12345",1,"20180610");
+            m = Asql.getEmpleabilidad().insertar(a);
+            // Listar empleabilidades
+            
+            List<empleabilidadTab> eList = Asql.getEmpleabilidad().listar();
+            
+            for (empleabilidadTab e : eList) {
+                System.out.println(e.toString());
+            }
+            */
+            /*
+            // insertar oferta
+            ofertaTab a = new ofertaTab("Blaaa Blaaa Blaaa Blaaa ","Blaaa Blaaa Blaaa Blaaa Blaaa Blaaa Blaaa","20180701","20180706");
+            m = Asql.getOferta().insertar(a);
+            
+            // Listar ofertas
+            List<ofertaTab> eList = Asql.getOferta().listar();
+            
+            for (ofertaTab e : eList) {
+                System.out.println(e.toString());
+            }
+            */  
+            /*
+            // insertar profesion
+            profesionTab a = new profesionTab("Zapatero");
+            m = Asql.getProfecion().insertar(a);
+            
+            // Listar profesiones
+            List<profesionTab> pList = Asql.getProfesion().listar();
+            
+            for (profesionTab p : pList) {
+                System.out.println(p.toString());
+            }
+            */
+            
         } catch (SQLException ex) {
             m.setTipo("Error");
             m.setMsj("Error " + ex.getLocalizedMessage());

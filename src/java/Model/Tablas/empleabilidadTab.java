@@ -12,22 +12,26 @@ import java.io.Serializable;
  * @author freyd
  */
 public class empleabilidadTab implements Serializable {
+
     private int id_empleabilidad;
-    private int id_aspirante;
+    private String id_aspirante;
+    private String aspirante;
     private int id_oferta;
+    private String oferta;
     private String fecha;
 
-    
-    public empleabilidadTab(int id_aspirante, int id_oferta, String fecha) {
+    public empleabilidadTab(String id_aspirante, int id_oferta, String fecha) {
         this.id_aspirante = id_aspirante;
         this.id_oferta = id_oferta;
         this.fecha = fecha;
     }
 
-    public empleabilidadTab(int id_empleabilidad, int id_aspirante, int id_oferta, String fecha) {
+    public empleabilidadTab(int id_empleabilidad, String id_aspirante, String aspirante, int id_oferta, String oferta, String fecha) {
         this.id_empleabilidad = id_empleabilidad;
         this.id_aspirante = id_aspirante;
+        this.aspirante = aspirante;
         this.id_oferta = id_oferta;
+        this.oferta = oferta;
         this.fecha = fecha;
     }
 
@@ -48,15 +52,29 @@ public class empleabilidadTab implements Serializable {
     /**
      * @return the id_aspirante
      */
-    public int getId_aspirante() {
+    public String getId_aspirante() {
         return id_aspirante;
     }
 
     /**
      * @param id_aspirante the id_aspirante to set
      */
-    public void setId_aspirante(int id_aspirante) {
+    public void setId_aspirante(String id_aspirante) {
         this.id_aspirante = id_aspirante;
+    }
+
+    /**
+     * @return the aspirante
+     */
+    public String getAspirante() {
+        return aspirante;
+    }
+
+    /**
+     * @param aspirante the aspirante to set
+     */
+    public void setAspirante(String aspirante) {
+        this.aspirante = aspirante;
     }
 
     /**
@@ -74,6 +92,20 @@ public class empleabilidadTab implements Serializable {
     }
 
     /**
+     * @return the oferta
+     */
+    public String getOferta() {
+        return oferta;
+    }
+
+    /**
+     * @param oferta the oferta to set
+     */
+    public void setOferta(String oferta) {
+        this.oferta = oferta;
+    }
+
+    /**
      * @return the fecha
      */
     public String getFecha() {
@@ -86,8 +118,14 @@ public class empleabilidadTab implements Serializable {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return "empleabilidadTab{" + "id_empleabilidad=" + id_empleabilidad + ", id_aspirante=" + id_aspirante + ", aspirante=" + aspirante + ", id_oferta=" + id_oferta + ", oferta=" + oferta + ", fecha=" + fecha + '}';
+    }
     
     
     
+
     
 }

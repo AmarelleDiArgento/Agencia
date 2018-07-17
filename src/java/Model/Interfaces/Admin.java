@@ -15,6 +15,6 @@ public interface Admin {
     aspirante getAspirante();
     empleabilidad getEmpleabilidad();
     oferta getOferta();
-    profesion getProfecion();
+    profesion getProfesion();
     
 }

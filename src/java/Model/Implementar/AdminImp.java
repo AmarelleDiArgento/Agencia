@@ -82,7 +82,7 @@ public class AdminImp implements Admin {
     }
 
     @Override
-    public profesion getProfecion() {
+    public profesion getProfesion() {
         if (pro == null) {
             pro = new profesionImp(con);
         }

@@ -40,7 +40,11 @@ constraint TbAspirante_TbProfesion Foreign Key (CodigoProfesion) references TbPr
 constraint TbAspirante_TbAgencia Foreign Key (CodigoAgencia) references TbAgencia (Nit) on delete cascade on update cascade
 );
 /**Ver Aspirantes Registrados**/
-create procedure VerAsp() select NumCedula,NombreAsp,Edad,Genero,TbProfesion.NomProf,TbAgencia.NombreAg from TbAspirante inner join TbProfesion on TbAspirante.CodigoProfesion=TbProfesion.IdProfesion inner join TbAgencia on TbAspirante.CodigoAgencia=TbAgencia.Nit;
+create procedure VerAsp() 
+select NumCedula,NombreAsp,Edad,Genero,TbAspirante.CodigoProfesion,TbProfesion.NomProf,TbAspirante.CodigoAgencia,TbAgencia.NombreAg 
+from TbAspirante 
+inner join TbProfesion on TbAspirante.CodigoProfesion=TbProfesion.IdProfesion 
+inner join TbAgencia on TbAspirante.CodigoAgencia=TbAgencia.Nit;
 /**Insertar nuevo Aspirante**/
 create procedure InsAspNew(in NumCedulaNew varchar(12),in NombreAspNew varchar(50),in EdadNew int ,in GeneroNew enum('Masculino','Femenino'),in CodigoProfesionNew int,in CodigoAgenciaNew int) insert into TbAspirante(NumCedula,NombreAsp,Edad,Genero,CodigoProfesion,CodigoAgencia) values(NumCedulaNew,NombreAspNew,EdadNew,GeneroNew,CodigoProfesionNew,CodigoAgenciaNew);
 
@@ -67,7 +71,11 @@ constraint TbEmpleabilidad_TbAspirante Foreign Key (IdAsp) references TbAspirant
 constraint TbEmpleabilidad_TbOFertas Foreign Key (IdOferta) references TbOFertas (IdOfer) on delete cascade on update cascade
 );
 /***Ver Empleabilidad*/
-create procedure ListadoEmplea()Select Id,IdAsp,NombreAsp,IdOferta,Fecha from TbEmpleabilidad inner join TbAspirante on TbEmpleabilidad.IdAsp=TbAspirante.NumCedula;
+create procedure VerEmplea()
+Select Id,TbEmpleabilidad.IdAsp,NombreAsp,TbEmpleabilidad.IdOferta,TbOFertas.NombreOfer,Fecha 
+from TbEmpleabilidad 
+inner join TbAspirante on TbEmpleabilidad.IdAsp=TbAspirante.NumCedula
+inner join TbOFertas on TbEmpleabilidad.IdOferta=TbOFertas.IdOfer;
 /**insertar empleabilidad*/
 create procedure InsEmplea(in IdAspNew varchar(12),in IdOfertaNew int, in FechaNew date)
 insert into TbEmpleabilidad(IdAsp,IdOferta,Fecha) values(IdAspNew,IdOfertaNew,FechaNew);

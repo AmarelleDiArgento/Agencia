@@ -103,6 +103,11 @@ public class ofertaTab implements Serializable{
         this.fecha_fin = fecha_fin;
     }
 
+    @Override
+    public String toString() {
+        return "ofertaTab{" + "id_oferta=" + id_oferta + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + '}';
+    }
+
     
     
     
