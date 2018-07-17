@@ -6,7 +6,6 @@
 package Model.Implementar;
 
 import Model.Interfaces.profesion;
-import Model.Tablas.ofertaTab;
 import Model.Tablas.profesionTab;
 import Servicios.Mensajes;
 import java.sql.Connection;
